@@ -58,6 +58,9 @@ public class SalvoController {
         dto.put("gamePlayers", gamePlayerList(gamePlayer.getGame().getGamePlayers()));
         dto.put("ships", shipsList(gamePlayer.getShips()));
         dto.put("salvoes", salvoesList(gamePlayer.getSalvoes()));
+        dto.put("enemySalvoes", salvoesList(gamePlayer.getGame().getGamePlayers().stream()
+                                                            .filter(gp -> !gp.getId().equals(gamePlayerID)).findFirst()
+                                                            .orElseThrow(() -> new RuntimeException()).getSalvoes()));
         return dto;
     }
 

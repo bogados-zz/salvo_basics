@@ -12,7 +12,6 @@ import java.util.Date;
 
 @SpringBootApplication
 public class SalvoApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(SalvoApplication.class, args);
     }
