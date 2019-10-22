@@ -3,10 +3,9 @@ package com.codeoftheweb.salvo.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -18,9 +17,19 @@ public class Player {
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
 
+
+    //Le restrijo que no sea nulo,
+    // que no este vacio y que sea unico
+    @NotNull
+    @NotEmpty
+    @Column(unique = true)
     private String email;
 
     private String name;
+
+    @NotNull
+    @NotEmpty
+    private String password;
 
     @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
     Set<GamePlayer> gamePlayers;
@@ -79,5 +88,17 @@ public class Player {
         dto.put("id", getId());
         dto.put("email", getEmail());
         return dto;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setLastLogin(Date date) {
+
     }
 }
