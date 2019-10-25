@@ -1,5 +1,4 @@
 $(function () {
-
     // display list
 
     function updateList(data) {
@@ -23,5 +22,13 @@ $(function () {
             });
     }
 
+    let searchParams = new URLSearchParams(window.location.search);
+    let token = searchParams.get('token');
+    localStorage.setItem("token", token);
+    $.ajaxSetup({
+        headers:{
+            'Authorization': localStorage.getItem("token")
+        }
+    });
     loadData();
 });
